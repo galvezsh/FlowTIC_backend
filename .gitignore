@@ -1,0 +1,59 @@
+# ================================
+# Spring Boot / Java
+# ================================
+
+# Ignore real configuration files with secrets
+/src/main/resources/application.properties
+/src/main/resources/application.yml
+
+# Environment files
+.env
+
+# Logs
+*.log
+
+# ================================
+# Maven / Gradle
+# ================================
+/target/
+.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+# ================================
+# IDEs
+# ================================
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+
+# ================================
+# OS generated files
+# ================================
+.DS_Store
+Thumbs.db
