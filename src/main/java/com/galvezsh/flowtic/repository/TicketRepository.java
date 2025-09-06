@@ -1,6 +1,8 @@
 package com.galvezsh.flowtic.repository;
 
 import com.galvezsh.flowtic.model.entity.Ticket;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -9,4 +11,6 @@ import org.springframework.stereotype.Repository;
  * Extends JpaRepository to provide CRUD operations without SQL code.
  */
 @Repository
-public interface TicketRepository extends JpaRepository<Ticket, Long> {  }
+public interface TicketRepository extends JpaRepository<Ticket, Long> {
+    Page<Ticket> findAll(Pageable pageable);
+}

@@ -1,6 +1,9 @@
 package com.galvezsh.flowtic.controller;
 
+import com.galvezsh.flowtic.model.dto.PagedResponse;
 import com.galvezsh.flowtic.model.dto.TicketDto;
+import jakarta.servlet.http.HttpServletRequest;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,13 +19,10 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/api/tickets")
+@RequiredArgsConstructor
 public class TicketController {
 
     private final TicketService service;
-
-    public TicketController(TicketService service) {
-        this.service = service;
-    }
 
     /**
      * GET /api/tickets
@@ -31,10 +31,23 @@ public class TicketController {
      * Success: Returns a list of TicketDto objects (HTTP 200).
      * Failure: If the database is empty, it will return an empty list (still HTTP 200).
      */
+//    @GetMapping
+//    public List<TicketDto> getAll() {
+//        return service.getAllTickets();
+//    }
+
     @GetMapping
-    public List<TicketDto> getAll() {
-        return service.getAllTickets();
+    public ResponseEntity<PagedResponse<TicketDto>> getAllPaged(
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "10") int size,
+            HttpServletRequest request
+    ) {
+
+        String baseUrl = request.getRequestURL().toString();
+        PagedResponse<TicketDto> response = service.getPagedTickets(page, size, baseUrl);
+        return ResponseEntity.ok(response);
     }
+
 
     /**
      * GET /api/tickets/{id}
